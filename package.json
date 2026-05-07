@@ -8,9 +8,14 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "prepare": "husky",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "preinstall": "node ./scripts/preinstall.js",
+    "build:test": "vue-tsc && vite build --mode test",
+    "build:proj": "vue-tsc && vite build --mode production"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "element-plus": "^2.13.7",
     "vue": "^3.5.32"
   },
   "devDependencies": {
@@ -31,6 +36,7 @@
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.10",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^3.2.7"
   }
 }
