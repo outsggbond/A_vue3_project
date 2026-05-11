@@ -1,12 +1,11 @@
-
-import SvgIcon from "./SvgIcon/index.vue"
+import SvgIcon from './SvgIcon/index.vue'
 const allGlobalComponent = [SvgIcon]
 //对外暴露对象
 console.log(allGlobalComponent)
 export default {
-    install(app: any) {
-      allGlobalComponent.forEach((component) => {
-        app.component(component.name, component)
-      })
-    }
+  install(app: any) {
+    allGlobalComponent.forEach((component) => {
+      app.component(component.name, component)
+    })
+  },
 }

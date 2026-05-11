@@ -1,15 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div>
-        
-    </div>
+  <div></div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-
-</script>
-
-<style>
-
-</style>
+<style></style>
