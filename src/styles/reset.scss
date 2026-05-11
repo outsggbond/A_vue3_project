@@ -20,20 +20,33 @@ html {
 /* 3. 基础 body 样式 */
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
   line-height: 1.5;
   background-color: #fff;
   color: #111;
 }
 
 /* 4. 标题：继承字体，清除加粗默认值（可保留一定程度加粗） */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-size: inherit;
   font-weight: 500;
 }
 
 /* 5. 列表：清除默认标记及缩进 */
-ul, ol, menu {
+ul,
+ol,
+menu {
   list-style: none;
 }
 
@@ -60,11 +73,11 @@ textarea {
 }
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button; /* 修复按钮在不同系统的默认样式 */
-  appearance: button;        // 添加这一行
+  appearance: button; // 添加这一行
   cursor: pointer;
 }
 
