@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import path from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
-import { fileURLToPath, URL } from 'node:url'   // 新增
+import { fileURLToPath, URL } from 'node:url' // 新增
 
 export default defineConfig(({ command }) => {
   return {
@@ -21,8 +21,8 @@ export default defineConfig(({ command }) => {
     // 新增 resolve 别名配置，让 @ 指向 src 目录
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
-      }
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+      },
     },
     css: {
       preprocessorOptions: {
