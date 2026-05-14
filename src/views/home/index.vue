@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
-  <router-view></router-view>
+    <h1>我是主页</h1>
   </div>
 </template>
 

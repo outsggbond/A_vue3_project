@@ -2,10 +2,11 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'virtual:svg-icons-register'
-const app = createApp(App)
-app.use(ElementPlus)
+import router from './router'
 //引入自定义插件组件
 import gloalComponent from './components'
+const app = createApp(App)
+app.use(ElementPlus)
 app.use(gloalComponent)
-
+app.use(router)
 app.mount('#app')
