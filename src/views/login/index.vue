@@ -2,7 +2,6 @@
 <template>
   <div class="login_container">
     <div class="login_box">
-
       <!-- 左侧 -->
       <div class="left_box">
         <h1>WELCOME</h1>
@@ -14,42 +13,24 @@
         <h1 class="title">用户登录</h1>
 
         <el-form class="login_form">
-
           <!-- 用户名 -->
           <el-form-item>
-            <el-input
-              v-model="username"
-              placeholder="请输入用户名"
-              clearable
-              :prefix-icon="User"
-            />
+            <el-input v-model="username" placeholder="请输入用户名" clearable :prefix-icon="User" />
           </el-form-item>
 
           <!-- 密码 -->
           <el-form-item>
-            <el-input
-              v-model="password"
-              type="password"
-              placeholder="请输入密码"
-              show-password
-              :prefix-icon="Lock"
-            />
+            <el-input v-model="password" type="password" placeholder="请输入密码" show-password :prefix-icon="Lock" />
           </el-form-item>
 
           <!-- 按钮 -->
           <el-form-item>
-            <el-button
-              type="primary"
-              class="login_btn"
-              @click="login"
-            >
+            <el-button type="primary" class="login_btn" @click="login" :loading="loading">
               登录
             </el-button>
           </el-form-item>
-
         </el-form>
       </div>
-
     </div>
   </div>
 </template>
@@ -59,22 +40,45 @@ import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { User, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store/modules/user'
+import { useRouter } from 'vue-router'
+import { ElNotification } from 'element-plus'
 const userStore = useUserStore()
 const username = ref('')
 const password = ref('')
-
-const login = () => {
+const $router = useRouter();
+let loading=ref(false)
+const login = async () => {
+  //开始加载
+  loading.value=true;
   if (!username.value || !password.value) {
     ElMessage.error('用户名或密码不能为空')
     return
   }
   //请求成功
+  try {
+    await userStore.userLogin(
+      {
+        username: username.value,
+        password: password.value
+      }
+    );
+    ElNotification({
+      type:'success',
+      message:'登录成功啦'
+    })
+    loading.value=false;
+    $router.push('/home');
+  } catch (error){
+    //登录失败加载就结束了
+    loading.value=false;
+      //登录失败的提示信息
+      ElNotification({
+        type:'error',
+        message:(error as Error).message
+      })
+  }
   //请求失败
-  userStore.userLogin({
-    username:username.value,
-    password: password.value
-  } )
-  ElMessage.success('登录成功')
+
 }
 </script>
 
@@ -88,8 +92,7 @@ const login = () => {
   justify-content: center;
   align-items: center;
 
-  background: url('@/assets/images/1.jpg')
-    no-repeat center center / cover;
+  background: url('@/assets/images/1.jpg') no-repeat center center / cover;
 }
 
 /* 登录盒子 */
@@ -136,7 +139,8 @@ const login = () => {
 .right_box {
   flex: 1;
 
-  background: transparent;  /* 改为透明 */
+  background: transparent;
+  /* 改为透明 */
   /* 或者 background: rgba(255,255,255,0); */
 
   display: flex;
@@ -162,7 +166,8 @@ const login = () => {
 
 /* 输入框 */
 :deep(.el-input__wrapper) {
-    background: transparent;  /* 改为透明 */
+  background: transparent;
+  /* 改为透明 */
   /* 或者 background: rgba(255,255,255,0); */
   height: 45px;
   border-radius: 10px;
