@@ -12,15 +12,16 @@
       <div class="right_box">
         <h1 class="title">用户登录</h1>
 
-        <el-form class="login_form">
+        <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginFormRef">
           <!-- 用户名 -->
-          <el-form-item>
-            <el-input v-model="username" placeholder="请输入用户名" clearable :prefix-icon="User" />
+          <el-form-item prop="username">
+            <el-input v-model="loginForm.username" placeholder="请输入用户名" clearable :prefix-icon="User" />
           </el-form-item>
 
           <!-- 密码 -->
-          <el-form-item>
-            <el-input v-model="password" type="password" placeholder="请输入密码" show-password :prefix-icon="Lock" />
+          <el-form-item prop="password">
+            <el-input v-model="loginForm.password" type="password" placeholder="请输入密码" show-password
+              :prefix-icon="Lock" />
           </el-form-item>
 
           <!-- 按钮 -->
@@ -36,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
+import { getTime } from '@/utils/time'
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { User, Lock } from '@element-plus/icons-vue'
@@ -43,43 +45,68 @@ import { useUserStore } from '@/store/modules/user'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
 const userStore = useUserStore()
-const username = ref('')
-const password = ref('')
-const $router = useRouter();
-let loading=ref(false)
+const $router = useRouter()
+let loading = ref(false)
+let loginForm = ref({
+  username: '',
+  password: '',
+})
+let loginFormRef = ref()
 const login = async () => {
+  //保证表单校验通过了才会继续往下走
+  await loginFormRef.value.validate()
   //开始加载
-  loading.value=true;
-  if (!username.value || !password.value) {
+  loading.value = true
+  if (!loginForm.value.username || !loginForm.value.password) {
     ElMessage.error('用户名或密码不能为空')
     return
   }
   //请求成功
   try {
-    await userStore.userLogin(
-      {
-        username: username.value,
-        password: password.value
-      }
-    );
-    ElNotification({
-      type:'success',
-      message:'登录成功啦'
+    await userStore.userLogin({
+      username: loginForm.value.username,
+      password: loginForm.value.password,
     })
-    loading.value=false;
-    $router.push('/home');
-  } catch (error){
+    ElNotification({
+      type: 'success',
+      title: '登录成功啦',
+      message: `${getTime()}，欢迎回来！`
+    })
+    loading.value = false
+    $router.push('/home')
+  } catch (error) {
     //登录失败加载就结束了
-    loading.value=false;
-      //登录失败的提示信息
-      ElNotification({
-        type:'error',
-        message:(error as Error).message
-      })
+    loading.value = false
+    //登录失败的提示信息
+    ElNotification({
+      type: 'error',
+      message: (error as Error).message,
+    })
   }
   //请求失败
-
 }
+//定义一个表单校验需要的配置对象
+const rules = {
+  username: [
+    {
+      required: true,
+      min: 3,
+      max: 20,
+      message: '长度必须在 3 - 20 之间',
+      trigger: 'change'
+    },
+  ],
+  password: [
+    {
+      required: true,
+      min: 6,
+      max: 20,
+      message: '长度必须在 6 - 20 之间',
+      trigger: 'change'
+    },
+  ],
+}
+
 </script>
 
 <style scoped lang="scss">
