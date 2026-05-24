@@ -54,7 +54,7 @@ let loginForm = ref({
 let loginFormRef = ref()
 const login = async () => {
   //保证表单校验通过了才会继续往下走
-  await loginFormRef.value.validate()
+  await loginFormRef.value?.validate()
   //开始加载
   loading.value = true
   if (!loginForm.value.username || !loginForm.value.password) {
@@ -70,7 +70,7 @@ const login = async () => {
     ElNotification({
       type: 'success',
       title: '登录成功啦',
-      message: `${getTime()}，欢迎回来！`
+      message: `${getTime()}，欢迎回来！`,
     })
     loading.value = false
     $router.push('/home')
@@ -86,27 +86,56 @@ const login = async () => {
   //请求失败
 }
 //定义一个表单校验需要的配置对象
-const rules = {
-  username: [
-    {
-      required: true,
-      min: 3,
-      max: 20,
-      message: '长度必须在 3 - 20 之间',
-      trigger: 'change'
-    },
-  ],
-  password: [
-    {
-      required: true,
-      min: 6,
-      max: 20,
-      message: '长度必须在 6 - 20 之间',
-      trigger: 'change'
-    },
-  ],
+// const rules = {
+//   username: [
+//     {
+//       required: true,
+//       min: 3,
+//       max: 20,
+//       message: '长度必须在 3 - 20 之间',
+//       trigger: 'change',
+//     },
+//   ],
+//   password: [
+//     {
+//       required: true,
+//       min: 6,
+//       max: 20,
+//       message: '长度必须在 6 - 20 之间',
+//       trigger: 'change',
+//     },
+//   ],
+// }
+const validatorUsername = (rule: any, value: any, callback: any) => {
+  //rule为校验规则对象
+  //value:为表单元素文本内容
+  //callback
+  //如果符合条件就会放行通过
+  //不符合条件就会注入一个错误提示信息
+  if (value.length >= 5) {
+    callback();           // 校验通过
+  } else {
+    callback(new Error('请输入5~10位数字,朝你吗'));
+  }
 }
-
+const validatorPassword = (rule: any, value: any, callback: any) => {
+  if (value.length >= 6) {
+    callback();           // 校验通过
+  } else {
+    callback(new Error('密码你给我输入好了啊,wokao，至少6位'));
+  }
+}
+//用自定义规则来限制
+const rules = {
+  username: [{
+    trigger: 'change',
+    validator: validatorUsername
+  }],
+  password: [{
+    trigger: 'change',
+    validator: validatorPassword
+  }]
+}
 </script>
 
 <style scoped lang="scss">

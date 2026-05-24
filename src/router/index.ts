@@ -2,7 +2,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { constantRoute } from './routers'
 //创建路由器
-let router = createRouter({
+const router = createRouter({
   //路由模式
   history: createWebHashHistory(),
   routes: constantRoute,

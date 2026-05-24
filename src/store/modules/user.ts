@@ -5,7 +5,7 @@ import { reqLogin } from '@/api/user'
 import type { loginForm, loginResponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
 //引入操作本地存储的函数
-import { setToken,getToken } from '@/utils/token'
+import { setToken, getToken } from '@/utils/token'
 export const useUserStore = defineStore('User', {
   //小仓库：用户相关数据
   state: (): UserState => {

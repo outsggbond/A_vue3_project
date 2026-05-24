@@ -3,7 +3,7 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'virtual:svg-icons-register'
 import router from './router'
-//引入自定义插件组件
+import '@/styles/index.scss'//引入自定义插件组件
 import gloalComponent from './components'
 import pinia from './store'
 const app = createApp(App)

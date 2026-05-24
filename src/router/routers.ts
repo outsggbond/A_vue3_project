@@ -1,11 +1,11 @@
 export const constantRoute = [
   {
     path: '/home',
-    component: () => import('@/views/home/index.vue'),
+    component: () => import('@/layout/index.vue'),
     name: 'home',
   },
   {
-    //登录成功后的路由
+    //登录前的的路由
     path: '/',
     component: () => import('@/views/login/index.vue'),
     name: 'login',
