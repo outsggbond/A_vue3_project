@@ -12,21 +12,41 @@
       <div class="right_box">
         <h1 class="title">用户登录</h1>
 
-        <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginFormRef">
+        <el-form
+          class="login_form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginFormRef"
+        >
           <!-- 用户名 -->
           <el-form-item prop="username">
-            <el-input v-model="loginForm.username" placeholder="请输入用户名" clearable :prefix-icon="User" />
+            <el-input
+              v-model="loginForm.username"
+              placeholder="请输入用户名"
+              clearable
+              :prefix-icon="User"
+            />
           </el-form-item>
 
           <!-- 密码 -->
           <el-form-item prop="password">
-            <el-input v-model="loginForm.password" type="password" placeholder="请输入密码" show-password
-              :prefix-icon="Lock" />
+            <el-input
+              v-model="loginForm.password"
+              type="password"
+              placeholder="请输入密码"
+              show-password
+              :prefix-icon="Lock"
+            />
           </el-form-item>
 
           <!-- 按钮 -->
           <el-form-item>
-            <el-button type="primary" class="login_btn" @click="login" :loading="loading">
+            <el-button
+              type="primary"
+              class="login_btn"
+              @click="login"
+              :loading="loading"
+            >
               登录
             </el-button>
           </el-form-item>
@@ -113,28 +133,32 @@ const validatorUsername = (rule: any, value: any, callback: any) => {
   //如果符合条件就会放行通过
   //不符合条件就会注入一个错误提示信息
   if (value.length >= 5) {
-    callback();           // 校验通过
+    callback() // 校验通过
   } else {
-    callback(new Error('请输入5~10位数字,朝你吗'));
+    callback(new Error('请输入5~10位数字,朝你吗'))
   }
 }
 const validatorPassword = (rule: any, value: any, callback: any) => {
   if (value.length >= 6) {
-    callback();           // 校验通过
+    callback() // 校验通过
   } else {
-    callback(new Error('密码你给我输入好了啊,wokao，至少6位'));
+    callback(new Error('密码你给我输入好了啊,wokao，至少6位'))
   }
 }
 //用自定义规则来限制
 const rules = {
-  username: [{
-    trigger: 'change',
-    validator: validatorUsername
-  }],
-  password: [{
-    trigger: 'change',
-    validator: validatorPassword
-  }]
+  username: [
+    {
+      trigger: 'change',
+      validator: validatorUsername,
+    },
+  ],
+  password: [
+    {
+      trigger: 'change',
+      validator: validatorPassword,
+    },
+  ],
 }
 </script>
 

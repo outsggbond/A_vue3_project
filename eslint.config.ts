@@ -17,10 +17,17 @@ export default defineConfig([
     files: ['**/*.vue'],
     languageOptions: { parserOptions: { parser: tseslint.parser } },
   },
-  // 👇 新增：允许使用 any 类型
+  // 允许使用 any 类型
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  // 👇 新增：关闭 Vue 组件必须使用多单词命名的规则限制
+  {
+    files: ['**/*.vue'],
+    rules: {
+      'vue/multi-word-component-names': 'off',
     },
   },
 ])
