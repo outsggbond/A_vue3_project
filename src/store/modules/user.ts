@@ -6,11 +6,15 @@ import type { loginForm, loginResponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
 //引入操作本地存储的函数
 import { setToken, getToken } from '@/utils/token'
+//引入常量路由
+import { constantRoute } from '@/router/routers'
+
 export const useUserStore = defineStore('User', {
   //小仓库：用户相关数据
   state: (): UserState => {
     return {
       token: getToken(), //  本地存储用户的唯一标识
+      menuRouters:constantRoute//存储生成菜单需要得数组
     }
   },
   //计算属性，简化仓库数据，让组件获取仓库数据更加方便

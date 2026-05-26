@@ -93,7 +93,7 @@ const login = async () => {
       message: `${getTime()}，欢迎回来！`,
     })
     loading.value = false
-    $router.push('/home')
+    $router.push('/layout')
   } catch (error) {
     //登录失败加载就结束了
     loading.value = false
