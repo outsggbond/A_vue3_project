@@ -15,10 +15,10 @@
     <!-- 有一个子孩子 -->
     <template v-if="item.children && item.children.length === 1">
       <el-menu-item :index="item.children[0].path" v-if="!item.children[0].meta.hidden">
+        <el-icon>
+          <component :is="item.meta.icon"></component>
+        </el-icon>
         <template #title>
-          <el-icon>
-            <component :is="item.meta.icon"></component>
-          </el-icon>
           <span>{{ item.children[0].meta?.title }}</span>
         </template>
       </el-menu-item>

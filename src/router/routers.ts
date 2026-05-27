@@ -93,7 +93,7 @@ export const constantRoute = [
     ],
   },
 
- // 商品管理
+  // 商品管理
   {
     path: '/product',
     component: () => import('@/layout/index.vue'),

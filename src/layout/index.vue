@@ -13,7 +13,8 @@
           text-color="rgba(255,255,255,0.7)"
           active-text-color="#ffffff"
           router
-          >
+          :default-active="$route.path"
+        >
           <!-- 动态菜单 -->
           <Menu :menuList="userStore.menuRouters" />
         </el-menu>
@@ -21,13 +22,15 @@
     </div>
 
     <!-- 顶部导航 -->
-    <div class="layout_tabbar">顶部导航区域</div>
+    <div class="layout_tabbar">
+      <!-- layout顶部导航 -->
+      <Tabbar></Tabbar>
+    </div>
 
     <!-- 内容区域 -->
     <div class="layout_main">
       <Main></Main>
     </div>
-    
   </div>
 </template>
 
@@ -38,10 +41,11 @@ import Logo from './logo/index.vue'
 
 // menu组件
 import Menu from './menu/index.vue'
-import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router'
 const userStore = useUserStore()
-let $router=useRouter();
+let $route = useRoute()
 import Main from './main/index.vue'
+import Tabbar from './tabbar/index.vue'
 </script>
 
 <style lang="scss" scoped>
