@@ -12,7 +12,8 @@
           background-color="transparent"
           text-color="rgba(255,255,255,0.7)"
           active-text-color="#ffffff"
-        >
+          router
+          >
           <!-- 动态菜单 -->
           <Menu :menuList="userStore.menuRouters" />
         </el-menu>
@@ -20,29 +21,31 @@
     </div>
 
     <!-- 顶部导航 -->
-    <div class="layout_tabbar">
-      顶部导航区域
-    </div>
+    <div class="layout_tabbar">顶部导航区域</div>
 
     <!-- 内容区域 -->
     <div class="layout_main">
-      内容展示区域
+      <Main></Main>
     </div>
+    
   </div>
 </template>
 
 <script setup lang="ts">
 // logo组件
-import { useUserStore } from '@/store/modules/user';
+import { useUserStore } from '@/store/modules/user'
 import Logo from './logo/index.vue'
 
 // menu组件
 import Menu from './menu/index.vue'
-const userStore = useUserStore();
+import { useRouter } from 'vue-router';
+const userStore = useUserStore()
+let $router=useRouter();
+import Main from './main/index.vue'
 </script>
 
 <style lang="scss" scoped>
-@use "sass:color";
+@use 'sass:color';
 
 .layout_container {
   width: 100%;
@@ -101,10 +104,7 @@ const userStore = useUserStore();
     :deep(.el-sub-menu) {
       // 子菜单背景色
       .el-menu {
-        --el-menu-bg-color: #{color.adjust(
-            $menu-bg-color,
-            $lightness: -4%
-          )} !important;
+        --el-menu-bg-color: #{color.adjust($menu-bg-color, $lightness: -4%)} !important;
       }
 
       // 子菜单标题hover

@@ -14,7 +14,7 @@ export const useUserStore = defineStore('User', {
   state: (): UserState => {
     return {
       token: getToken(), //  本地存储用户的唯一标识
-      menuRouters:constantRoute//存储生成菜单需要得数组
+      menuRouters: constantRoute, //存储生成菜单需要得数组
     }
   },
   //计算属性，简化仓库数据，让组件获取仓库数据更加方便
