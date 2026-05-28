@@ -3,7 +3,7 @@
     <el-button size="small" :icon="Refresh" circle></el-button>
     <el-button size="small" :icon="FullScreen" circle></el-button>
     <el-button size="small" :icon="Setting" circle></el-button>
-    <img src="/logo.png" style="width:24px;height:24px;" />
+    <img src="/logo.png" style="width: 24px; height: 24px" />
     <el-dropdown>
       <span class="el-dropdown-link">
         Dropdown List
@@ -19,8 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { Refresh, FullScreen, Setting } from '@element-plus/icons-vue';
-import { ArrowDown } from '@element-plus/icons-vue';
+defineOptions({ name: 'Setting' })
+import { Refresh, FullScreen, Setting } from '@element-plus/icons-vue'
+import { ArrowDown } from '@element-plus/icons-vue'
 </script>
 
 <style scoped lang="scss">

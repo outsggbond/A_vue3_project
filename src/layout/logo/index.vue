@@ -8,6 +8,7 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({ name: 'Logo' })
 // 引入设置的标题和这个logo
 import setting from '@/setting'
 </script>

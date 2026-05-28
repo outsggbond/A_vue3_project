@@ -7,6 +7,7 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({ name: 'Main' })
 // 这里不需要额外逻辑，纯靠 CSS 魔法
 </script>
 
