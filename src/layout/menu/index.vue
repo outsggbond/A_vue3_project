@@ -49,7 +49,6 @@ defineOptions({ name: 'Menu' })
 defineProps(['menuList'])
 </script>
 
-
 <style scoped>
 /* 这里可以写你的菜单专属样式 */
 </style>

@@ -1,14 +1,27 @@
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fancy-flash" mode="out-in">
-      <component :is="Component" />
+      <component :is="Component" v-if="flag" />
     </transition>
   </router-view>
 </template>
 
 <script setup lang="ts">
+import { watch, ref,nextTick } from 'vue'
 defineOptions({ name: 'Main' })
-// 这里不需要额外逻辑，纯靠 CSS 魔法
+import useLyaOutsettingStore from '@/store/modules/setting';
+//监听仓库内部的数据是否发生变化,说明用户点击过刷新的按钮
+let layOutSettingStore = useLyaOutsettingStore();
+let flag = ref(true);
+watch(layOutSettingStore, () => {
+  //  点击后这个flage变化，进行刷新
+  flag.value =false;
+  nextTick(()=>{
+    flag.value=true;
+  })
+})
+
+
 </script>
 
 <style scoped>
@@ -18,7 +31,8 @@ defineOptions({ name: 'Main' })
 .fancy-flash-leave-to {
   opacity: 0;
   transform: scale(0.8) rotateX(30deg) translateY(-30px);
-  filter: blur(10px) brightness(2); /* 造成一种瞬间蒸发闪烁的效果 */
+  filter: blur(10px) brightness(2);
+  /* 造成一种瞬间蒸发闪烁的效果 */
 }
 
 /* 2. 离开过程的过渡速度（离场要快，不然用户觉得卡顿） */
@@ -30,7 +44,8 @@ defineOptions({ name: 'Main' })
 .fancy-flash-enter-from {
   opacity: 0;
   transform: scale(1.2) rotateX(-20deg) translateY(40px);
-  filter: blur(20px) contrast(3); /* 超强光晕效果 */
+  filter: blur(20px) contrast(3);
+  /* 超强光晕效果 */
 }
 
 /* 4. 进入完成的状态：恢复正常 */
@@ -47,6 +62,7 @@ defineOptions({ name: 'Main' })
 
 /* ================= 辅助：给大容器加个视距，让 3D 效果更立体 ================= */
 :deep(.layout_main) {
-  perspective: 1000px; /* 赋予内容区 3D 空间感 */
+  perspective: 1000px;
+  /* 赋予内容区 3D 空间感 */
 }
 </style>

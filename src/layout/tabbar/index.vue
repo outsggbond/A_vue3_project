@@ -14,6 +14,9 @@
 import breadcrumb from '@/layout/tabbar/breadcrumb/index.vue'
 import setting from '@/layout/tabbar/setting/index.vue'
 defineOptions({ name: 'Tabbar' })
+
+
+
 </script>
 
 <style lang="scss" scoped>

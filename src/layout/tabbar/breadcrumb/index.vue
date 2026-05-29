@@ -4,8 +4,15 @@
       <component :is="layoutStore.fold ? Fold : Expand" />
     </el-icon>
     <el-breadcrumb :separator-icon="ArrowRight">
-      <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+
+      <!-- 面包屑展示路由的标题 -->
+      <el-breadcrumb-item v-for="(item, index) in $route.matched" :key="index" v-show="item.meta.title" :to="item.path">
+        <!-- 图标 -->
+        <el-icon>
+          <component :is="item.meta.icon"></component>
+        </el-icon>
+        <span>{{ item.meta.title }}</span>
+      </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -14,12 +21,13 @@
 defineOptions({ name: 'Breadcrumb' })
 import { ArrowRight, Fold, Expand } from '@element-plus/icons-vue'
 import useLayoutSettingStore from '@/store/modules/setting'
-
+import { useRoute } from 'vue-router'
 const layoutStore = useLayoutSettingStore()
-
+let $route = useRoute();
 const changeIcon = () => {
   layoutStore.fold = !layoutStore.fold
 }
+
 </script>
 
 <style scoped lang="scss">

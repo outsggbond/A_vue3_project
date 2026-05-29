@@ -201,7 +201,9 @@ $fold-menu-width: 64px;
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
-    transition: left 0.3s ease, width 0.3s ease;
+    transition:
+      left 0.3s ease,
+      width 0.3s ease;
 
     // 折叠时通过自身 fold 类同步位置
     &.fold {
@@ -221,7 +223,9 @@ $fold-menu-width: 64px;
     overflow: auto;
     background: #f5f7fa;
     box-sizing: border-box;
-    transition: left 0.3s ease, width 0.3s ease;
+    transition:
+      left 0.3s ease,
+      width 0.3s ease;
 
     // 折叠时通过自身 fold 类同步位置
     &.fold {
@@ -250,7 +254,7 @@ $fold-menu-width: 64px;
 /* ================= 折叠后弹出的子菜单背景统一深色 ================= */
 .el-menu--popup {
   // 使用与侧边栏相同的背景色（根据你的 $menu-bg-color 变量值调整）
-  background-color: #{$menu-bg-color} !important;  // 如果 $menu-bg-color 未定义，直接用色值如 #304156
+  background-color: #{$menu-bg-color} !important; // 如果 $menu-bg-color 未定义，直接用色值如 #304156
   border: none !important;
 
   // 弹出菜单中的文字颜色

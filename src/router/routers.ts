@@ -18,9 +18,9 @@ export const constantRoute = [
     name: 'Layout',
     redirect: '/home',
     meta: {
-      title: '首页',
+      title: '',
       hidden: false,
-      icon: 'House',
+      icon: '',
     },
     children: [
       {

@@ -1,13 +1,15 @@
 <template>
   <div class="setting-container">
-    <el-button size="small" :icon="Refresh" circle></el-button>
-    <el-button size="small" :icon="FullScreen" circle></el-button>
+    <el-button size="small" :icon="Refresh" circle @click="Reflesh"></el-button>
+    <el-button size="small" :icon="FullScreen" circle @click="fullscreen"></el-button>
     <el-button size="small" :icon="Setting" circle></el-button>
     <img src="/logo.png" style="width: 24px; height: 24px" />
     <el-dropdown>
       <span class="el-dropdown-link">
         Dropdown List
-        <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+        <el-icon class="el-icon--right">
+          <ArrowDown />
+        </el-icon>
       </span>
       <template #dropdown>
         <el-dropdown-menu>
@@ -22,6 +24,21 @@
 defineOptions({ name: 'Setting' })
 import { Refresh, FullScreen, Setting } from '@element-plus/icons-vue'
 import { ArrowDown } from '@element-plus/icons-vue'
+import useLyaOutsettingStore from '@/store/modules/setting';
+let layoutSettingStore = useLyaOutsettingStore();
+//刷新按钮点击的回调
+const Reflesh = () => {
+  layoutSettingStore.reflesh = !layoutSettingStore.reflesh;
+}
+
+const fullscreen=()=>{
+  let screen=document.fullscreenElement;
+  if(!screen){
+    document.documentElement.requestFullscreen();
+  }else{
+    document.exitFullscreen();
+  }
+}
 </script>
 
 <style scoped lang="scss">
