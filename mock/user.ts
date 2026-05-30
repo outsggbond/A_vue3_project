@@ -105,7 +105,7 @@ export default [
       const { password, ...userInfo } = checkUser
       return {
         code: 200,
-        data: { user: userInfo },
+        data: { checkUser: userInfo },
       }
     },
   },

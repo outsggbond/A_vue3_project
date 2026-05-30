@@ -20,7 +20,7 @@ export const constantRoute = [
     meta: {
       title: '',
       hidden: false,
-      icon: '',
+      icon: 'House',
     },
     children: [
       {

@@ -1,6 +1,7 @@
 //进行axios二次封装：使用请求和网络拦截器
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
+import { useUserStore } from '@/store/modules/user'
 //第一步：利用axios对象创建create 方法，去创建axios实例（可以配置其他配置）
 let request = axios.create({
   //基础路径
@@ -9,6 +10,11 @@ let request = axios.create({
 })
 //第二步：ruquest实力添加请求与响应拦截器
 request.interceptors.request.use((config) => {
+  //获取用户相关的小仓库：获取仓库的内部的token，登录成功后携带给服务器
+  const userStore=useUserStore();
+  if(userStore.token){
+    config.headers.token=userStore.token;
+  }
   //config配置对象，h
   //返回配置对象
   return config

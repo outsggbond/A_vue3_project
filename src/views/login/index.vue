@@ -62,7 +62,7 @@ import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { User, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store/modules/user'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 const userStore = useUserStore()
 const $router = useRouter()
@@ -71,6 +71,9 @@ let loginForm = ref({
   username: '',
   password: '',
 })
+//路由对象
+let $route=useRoute();
+let redirect:any=$route.query.redirect;
 let loginFormRef = ref()
 const login = async () => {
   //保证表单校验通过了才会继续往下走
@@ -93,7 +96,7 @@ const login = async () => {
       message: `${getTime()}，欢迎回来！`,
     })
     loading.value = false
-    $router.push('/layout')
+    $router.push({path:redirect||'/layout'})
   } catch (error) {
     //登录失败加载就结束了
     loading.value = false

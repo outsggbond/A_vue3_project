@@ -6,7 +6,7 @@ const useLayOutsettingStore = defineStore('SettingStore', {
   state: () => {
     return {
       fold: false, //用于控制菜单折叠还是收起控制
-      reflesh:false,//用来控制刷新的变量
+      reflesh: false, //用来控制刷新的变量
     }
   },
 })

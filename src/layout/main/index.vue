@@ -7,21 +7,19 @@
 </template>
 
 <script setup lang="ts">
-import { watch, ref,nextTick } from 'vue'
+import { watch, ref, nextTick } from 'vue'
 defineOptions({ name: 'Main' })
-import useLyaOutsettingStore from '@/store/modules/setting';
+import useLyaOutsettingStore from '@/store/modules/setting'
 //监听仓库内部的数据是否发生变化,说明用户点击过刷新的按钮
-let layOutSettingStore = useLyaOutsettingStore();
-let flag = ref(true);
+let layOutSettingStore = useLyaOutsettingStore()
+let flag = ref(true)
 watch(layOutSettingStore, () => {
   //  点击后这个flage变化，进行刷新
-  flag.value =false;
-  nextTick(()=>{
-    flag.value=true;
+  flag.value = false
+  nextTick(() => {
+    flag.value = true
   })
 })
-
-
 </script>
 
 <style scoped>
