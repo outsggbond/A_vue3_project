@@ -8,10 +8,13 @@
       @click="fullscreen"
     ></el-button>
     <el-button size="small" :icon="Setting" circle></el-button>
-    <img :src="userStore.avatar" style="width: 24px; height: 24px ;border-radius:50%" />
+    <img
+      :src="userStore.avatar"
+      style="width: 24px; height: 24px; border-radius: 50%"
+    />
     <el-dropdown>
       <span class="el-dropdown-link">
-        {{userStore.username}}
+        {{ userStore.username }}
         <el-icon class="el-icon--right">
           <ArrowDown />
         </el-icon>
@@ -31,12 +34,12 @@ import { Refresh, FullScreen, Setting } from '@element-plus/icons-vue'
 import { ArrowDown } from '@element-plus/icons-vue'
 import useLyaOutsettingStore from '@/store/modules/setting'
 import { useUserStore } from '@/store/modules/user'
-import {useRouter,useRoute} from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 //获取一个路由器对象
-let $router=useRouter();
+let $router = useRouter()
 //获取路由对象
-let $route=useRoute();
-let userStore=useUserStore();
+let $route = useRoute()
+let userStore = useUserStore()
 
 let layoutSettingStore = useLyaOutsettingStore()
 //刷新按钮点击的回调
@@ -52,11 +55,10 @@ const fullscreen = () => {
     document.exitFullscreen()
   }
 }
-const userlogout=()=>{
-  userStore.useLogout();
-  $router.push({path:'/',query:{redirect:$route.path}});
+const userlogout = () => {
+  userStore.useLogout()
+  $router.push({ path: '/', query: { redirect: $route.path } })
 }
-
 </script>
 
 <style scoped lang="scss">

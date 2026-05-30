@@ -5,7 +5,7 @@ import { reqLogin, reqUserInfo } from '@/api/user'
 import type { loginForm, loginResponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
 //引入操作本地存储的函数
-import { setToken, getToken ,REMOVE_TOKEN} from '@/utils/token'
+import { setToken, getToken, REMOVE_TOKEN } from '@/utils/token'
 //引入常量路由
 import { constantRoute } from '@/router/routers'
 
@@ -40,22 +40,21 @@ export const useUserStore = defineStore('User', {
     //获取用户信息的方法
     async userInfo() {
       //获取用户信息 进行仓库[里面的用户头像，名称]
-      const result = await reqUserInfo();
+      const result = await reqUserInfo()
       //如果获取用户信息成功，存储用户信息
       if (result.code == 200) {
-        this.username = result.data.checkUser.username;
-        this.avatar = result.data.checkUser.avatar;
+        this.username = result.data.checkUser.username
+        this.avatar = result.data.checkUser.avatar
       } else {
-
       }
     },
     //退出登录
-    useLogout(){
+    useLogout() {
       //目前没有退出登录的接口，来像服务器请求退出登录
-      this.token='';
-      this.username='';
-      this.avatar='';
-     REMOVE_TOKEN();
-    }
+      this.token = ''
+      this.username = ''
+      this.avatar = ''
+      REMOVE_TOKEN()
+    },
   },
 })

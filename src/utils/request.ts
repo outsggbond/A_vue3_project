@@ -11,9 +11,9 @@ let request = axios.create({
 //第二步：ruquest实力添加请求与响应拦截器
 request.interceptors.request.use((config) => {
   //获取用户相关的小仓库：获取仓库的内部的token，登录成功后携带给服务器
-  const userStore=useUserStore();
-  if(userStore.token){
-    config.headers.token=userStore.token;
+  const userStore = useUserStore()
+  if (userStore.token) {
+    config.headers.token = userStore.token
   }
   //config配置对象，h
   //返回配置对象

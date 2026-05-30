@@ -7,13 +7,13 @@
 
 <script setup lang="ts">
 //引入组合式api函数：生命周期函数
-import {onMounted} from 'vue'
+import { onMounted } from 'vue'
 //获取仓库
-import { useUserStore } from '@/store/modules/user';
+import { useUserStore } from '@/store/modules/user'
 
-let userStore =useUserStore();
-onMounted(()=>{
-  userStore.userInfo();
+let userStore = useUserStore()
+onMounted(() => {
+  userStore.userInfo()
 })
 </script>
 

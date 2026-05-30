@@ -6,6 +6,7 @@ import router from './router'
 import '@/styles/index.scss' //引入自定义插件组件
 import gloalComponent from './components'
 import pinia from './store'
+import './permission.ts'
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(gloalComponent)
