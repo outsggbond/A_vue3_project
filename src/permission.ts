@@ -1,27 +1,59 @@
-//路由鉴权，项目当中路由能不能呗权限的设置（某一个路由什么条件下可以给访问，什么条件下不能被访问
-import router  from "./router";
-import nprogress from 'nprogress';
+import router from './router'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+import setting from './setting'
+import { useUserStore } from './store/modules/user'
+import pinia from './store'
+nprogress.configure({ showSpinner: false });
 
-//引入进度条得样式
-import "nprogress/nprogress.css"
+const userStore = useUserStore(pinia)
 
-//全局守卫：当项目中任意路由切换都会触发的钩子
-//全局的前置守卫
-router.beforeEach((to:any,from:any,next:any)=>{
-//访问某一个路由之前的守卫
-//to：访问的路由对象
-//from:你从那个路由而来
-//next:路由的放行函数
-nprogress.start();
-next();
+router.beforeEach(async (to, from, next) => {
+  document.title = setting.title + '-' + to.meta.title;
+
+  nprogress.start()
+
+  const token = userStore.token
+  const username = userStore.username
+
+  // 已登录
+  if (token) {
+    // 登录页禁止访问
+    if (to.path === '/') {
+      next('/home')
+    } else {
+      // 已有用户信息
+      if (username) {
+        next()
+      } else {
+        try {
+          // 获取用户信息
+          await userStore.userInfo()
+
+          next()
+        } catch (error) {
+          // token失效过期，或者是用户手动修改存储
+          userStore.useLogout();
+          next({ path: '/', query: { redirect: to.path } })
+        }
+      }
+    }
+  }
+  // 未登录
+  else {
+    if (to.path === '/') {
+      next()
+    } else {
+      next({
+        path: '/',
+        query: {
+          redirect: to.path,
+        },
+      })
+    }
+  }
 })
 
-
-
-//全局的后置守卫
-router.afterEach((to,from,next)=>{
-nprogress.done();
-
+router.afterEach(() => {
+  nprogress.done()
 })
-
-//第一个问题：任意路由切换实现进度条业务
